@@ -14,16 +14,23 @@ const studentSchema = new Schema(
       unique: true,
       index: true
     },
+    emailVerified: {
+      type: Boolean,
+      default: false
+    },
     studentId: {
       type: String,
-      required: true,
+      index: true,
       default: generateToken(16)
     },
     phone: {
       type: String,
       required: true,
-      unique: true,
-      index: true
+      unique: true
+    },
+    phoneVerified: {
+      type: Boolean,
+      default: false
     },
     password: {
       type: String,
@@ -35,12 +42,11 @@ const studentSchema = new Schema(
     },
     balance: {
       type: Number,
-      required: true,
       default: 0
     },
     orders: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Order"
       }
     ]

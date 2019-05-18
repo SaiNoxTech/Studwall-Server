@@ -16,6 +16,7 @@ const vendorSchema = new Schema(
     },
     vendorId: {
       type: String,
+      index: true,
       default: generateToken(16)
     },
     password: {
@@ -29,7 +30,7 @@ const vendorSchema = new Schema(
     },
     orders: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Order"
       }
     ]

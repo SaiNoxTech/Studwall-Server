@@ -32,7 +32,6 @@ module.exports = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    error.statusCode = error.statusCode || 500;
     next(error);
   }
 };

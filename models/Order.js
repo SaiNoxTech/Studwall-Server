@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const generateToken = require("../helpers/generateToken");
+const generateToken = require("../helpers/generateRandomToken");
 const { Schema } = mongoose;
 
 const orderSchema = new Schema(
@@ -21,11 +21,11 @@ const orderSchema = new Schema(
       default: generateToken(32)
     },
     sender: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Student"
     },
     receiver: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Vendor"
     },
     transactionId: {
