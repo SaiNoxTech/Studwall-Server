@@ -11,4 +11,7 @@ router.get("/current", isAuth, authController.getCurrentUser);
 // Registeration of Student only
 router.post("/register", ifUserExists, authController.postRegister);
 
+// Login(Vendor and Student)
+router.post("/login", authController.postLogin);
+
 module.exports = router;
