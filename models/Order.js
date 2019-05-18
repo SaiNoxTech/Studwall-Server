@@ -29,8 +29,7 @@ const orderSchema = new Schema(
       ref: "Vendor"
     },
     transactionId: {
-      type: mongoose.Types.ObjectId,
-      ref: "Transaction"
+      type: String
     }
   },
   { timestamps: true }

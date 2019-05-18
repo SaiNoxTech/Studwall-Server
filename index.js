@@ -10,6 +10,14 @@ app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
 
+app.use((error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
+  res.status(statusCode).json({
+    error: true,
+    message: error.message
+  });
+});
+
 app.listen(PORT, () => {
   console.log("Server has connected");
 });
