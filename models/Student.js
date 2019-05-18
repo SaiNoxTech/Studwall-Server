@@ -38,7 +38,8 @@ const studentSchema = new Schema(
     },
     usn: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     balance: {
       type: Number,
