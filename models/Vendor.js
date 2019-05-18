@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const generateToken = require("../helpers/generateToken");
+const generateToken = require("../helpers/generateRandomToken");
 const { Schema } = mongoose;
 
 const vendorSchema = new Schema(
