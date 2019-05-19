@@ -4,13 +4,9 @@ const { Schema } = mongoose;
 
 const orderSchema = new Schema(
   {
-    price: {
+    totalPrice: {
       type: Number,
       required: true
-    },
-    qty: {
-      type: Number,
-      default: 1
     },
     status: {
       type: Boolean,
@@ -29,8 +25,15 @@ const orderSchema = new Schema(
       ref: "Vendor"
     },
     transactionId: {
-      type: String
-    }
+      type: String,
+      required: true
+    },
+    items: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Student"
+      }
+    ]
   },
   { timestamps: true }
 );
