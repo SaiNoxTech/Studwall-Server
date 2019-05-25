@@ -6,6 +6,8 @@ const keys = require("./config/keys");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const PrimeVendor = require("./models/PrimeVendor");
+
 const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 
@@ -22,13 +24,26 @@ app.use((error, req, res, next) => {
   });
 });
 
-mongoose.connect(keys.DB_URI, err => {
+mongoose.connect(keys.DB_URI, async err => {
   if (err) {
     throw err;
   } else {
     console.log("DB Connected");
-    app.listen(PORT, () => {
-      console.log("Server has connected");
-    });
+    try {
+      // Create a PrimeVendor if it doesn't exists.
+      let primeVendor = await PrimeVendor.findOne();
+      if (!primeVendor) {
+        primeVendor = new PrimeVendor();
+        await primeVendor.save();
+        console.log("PrimeVendor Created");
+      }
+      // Set the vendorId of PrimeVendor in env variable.
+      process.env.PRIME_VENDOR_ID = primeVendor.vendorId;
+      app.listen(PORT, () => {
+        console.log("Server has connected");
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 });
