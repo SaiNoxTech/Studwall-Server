@@ -7,6 +7,8 @@ exports.postGenerateOrder = async (req, res, next) => {
   // VALIDATE USER INPUT
   try {
     const totalPrice = calculateTotal(req.body.items);
+
+    // For adding money, using a query param of addMoney=True
     const vendorId = req.query.addMoney
       ? process.env.PRIME_VENDOR_ID
       : req.body.vendorId;
