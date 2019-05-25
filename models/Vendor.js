@@ -30,7 +30,7 @@ const vendorSchema = new Schema(
     },
     orders: [
       {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "Order"
       }
     ]
