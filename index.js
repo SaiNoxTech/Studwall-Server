@@ -10,11 +10,14 @@ const PrimeVendor = require("./models/PrimeVendor");
 
 const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+
 
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
 app.use("/order", orderRoutes);
+app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
   error.statusCode = error.statusCode || 500;
