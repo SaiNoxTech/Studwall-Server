@@ -28,8 +28,8 @@ app.use((error, req, res, next) => {
     message: error.message
   });
 });
-
-mongoose.connect(keys.DB_URI, async err => {
+mongoose.set("useCreateIndex", true);
+mongoose.connect(keys.DB_URI, { useNewUrlParser: true }, async err => {
   if (err) {
     throw err;
   } else {
