@@ -7,10 +7,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const authRoutes = require("./routes/authRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
+app.use("/order", orderRoutes);
 
 app.use((error, req, res, next) => {
   error.statusCode = error.statusCode || 500;

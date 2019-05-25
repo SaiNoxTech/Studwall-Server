@@ -1,14 +1,5 @@
-let keys;
-
 if (process.env.NODE_ENV === "production") {
-  keys = require("./prod-keys");
+  module.exports = require("./prod-keys");
 } else {
-  keys = require("./dev-keys");
+  module.exports = require("./dev-keys");
 }
-
-module.exports = {
-  ...keys,
-  CHANNEL_ID: "WEB",
-  INDUSTRY_TYPE_ID: "E-Commerce",
-  WEBSITE: "studwall"
-};

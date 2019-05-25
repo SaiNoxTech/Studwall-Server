@@ -29,6 +29,7 @@ module.exports = async (req, res, next) => {
       return next(error);
     }
     // set the current user(vendor/student) as req.user
+    user.userType = payload.userType;
     req.user = user;
     next();
   } catch (error) {
