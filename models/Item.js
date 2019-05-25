@@ -9,15 +9,22 @@ const itemSchema = new Schema(
       required: true
     },
     owner: {
-      type: Schema.Types.ObjectId,
-      ref: "Vendor"
+      type: String,
+      required: true
     },
     itemId: {
       type: String,
-      default: generateToken(32)
+      default: generateToken(32),
+      index: true
     }
   },
   { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
 );
 
+itemSchema.virtual("ownerDocument", {
+  ref: "Vendor",
+  localField: "owner",
+  foreignField: "vendorId",
+  justOne: true
+});
 module.exports = mongoose.model("Item", itemSchema);
