@@ -18,7 +18,7 @@ const itemSchema = new Schema(
       index: true
     }
   },
-  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
+  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true }, strict: false }
 );
 
 itemSchema.virtual("ownerDocument", {
