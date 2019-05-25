@@ -29,9 +29,9 @@ const orderSchema = new Schema(
     },
     items: [
       {
-        id: {
+        itemId: {
           type: String,
-          ref: "Item"
+          required: true
         },
         qty: {
           type: Number,

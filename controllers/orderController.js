@@ -18,9 +18,7 @@ exports.postGenerateOrder = async (req, res, next) => {
       receiver: vendorId,
       items: req.body.items
     });
-    const TXN_AMOUNT = req.body.TXN_AMOUNT;
-
-    console.log(order);
+    const TXN_AMOUNT = String(totalPrice);
 
     const orderObj = {
       ORDER_ID: order.orderId,
@@ -31,21 +29,32 @@ exports.postGenerateOrder = async (req, res, next) => {
       MOBILE_NO: req.user.phone,
       EMAIL: req.user.email,
       INDUSTRY_TYPE_ID: keys.INDUSTRY_TYPE_ID,
-      VEN_ID: order.receiver
+      VEN_ID: order.receiver,
+      PAYTM_MERCHANT_KEY: keys.PAYTM_MERCHANT_KEY
     };
 
+    // Convert to array with keys
+    const orderArr = [];
+    for (name in orderObj) {
+      orderArr[name] = orderObj[name];
+    }
     checksum.genchecksum(
-      orderObj,
+      orderArr,
       keys.PAYTM_MERCHANT_KEY,
-      (err, checksumHash) => {
+      async (err, params) => {
         if (err) {
           return next(err);
         }
-        orderObj.CHECKSUMHASH = checksumHash;
-        res.json({
-          success: true,
-          orderObj
-        });
+        orderObj.CHECKSUMHASH = params.CHECKSUMHASH;
+        try {
+          await order.save();
+          res.json({
+            success: true,
+            orderObj
+          });
+        } catch (error) {
+          next(error);
+        }
       }
     );
   } catch (error) {

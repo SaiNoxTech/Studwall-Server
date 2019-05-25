@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   if (req.user.userType === "Student") {
     next();
   } else {
-    const error = new Error("Only user can add money");
+    const error = new Error("Only student can add money");
     error.statusCode = 403;
     next(error);
   }

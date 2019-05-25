@@ -5,12 +5,11 @@ module.exports = async (req, res, next) => {
   const promiseArr = [];
   let promise;
   req.body.items.map(item => {
-    promise = Item.findOne({ itemId: item.id });
+    promise = Item.findOne({ itemId: item.itemId });
     promiseArr.push(promise);
   });
   try {
     const resultItemsArr = await Promise.all(promiseArr);
-    console.log(resultItemsArr);
     for (let i = 0; i < resultItemsArr.length; i++) {
       let item = resultItemsArr[i];
       // item is falsy thus id of an element in req.body.items[] does not exists.
@@ -21,7 +20,7 @@ module.exports = async (req, res, next) => {
       } else {
         // Find the fetched(resultItemsArr) item's itemId in req.body.items[]
         const foundItem = req.body.items.find(bodyItem => {
-          return bodyItem.id === item.itemId;
+          return bodyItem.itemId === item.itemId;
         });
         // Add the qty attribute from it to the item in resultItemsArr
         item.qty = foundItem.qty;
