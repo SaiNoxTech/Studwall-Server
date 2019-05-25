@@ -6,7 +6,7 @@ const calculateTotal = require("../helpers/calculateTotal");
 exports.postGenerateOrder = async (req, res, next) => {
   // VALIDATE USER INPUT
   try {
-    const totalPrice = calculateTotal(req.body.items);
+    const totalPrice = calculateTotal(req.items);
 
     // For adding money, using a query param of addMoney=True
     const vendorId = req.query.addMoney
