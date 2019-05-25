@@ -19,6 +19,9 @@ app.use("/order", orderRoutes);
 app.use("/admin", adminRoutes);
 
 app.use((error, req, res, next) => {
+  if (typeof error === "string") {
+    error = new Error(error);
+  }
   error.statusCode = error.statusCode || 500;
   res.status(error.statusCode).json({
     error: true,
