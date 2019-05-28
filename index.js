@@ -11,12 +11,14 @@ const { setPrimeVendor, setSCoin } = require("./helpers/primeVendorSeed");
 const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const callBackRoutes = require("./routes/callBackRoutes");
 
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
 app.use("/order", orderRoutes);
 app.use("/admin", adminRoutes);
+app.use("/callback", callBackRoutes);
 
 app.use((error, req, res, next) => {
   if (typeof error === "string") {
