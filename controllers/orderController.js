@@ -47,7 +47,7 @@ exports.postGenerateOrder = async (req, res, next) => {
         }
         orderObj.CHECKSUMHASH = params.CHECKSUMHASH;
         try {
-          // await order.save();
+          await order.save();
           res.json({
             success: true,
             orderObj
