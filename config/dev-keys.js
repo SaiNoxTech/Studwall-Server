@@ -8,5 +8,5 @@ module.exports = {
   CHANNEL_ID: "WAP",
   INDUSTRY_TYPE_ID: "Retail",
   WEBSITE: "WEBSTAGING",
-  CALLBACK_URL: "http://localhost:3000/order/callback/transaction"
+  CALLBACK_URL: "http://localhost:5000/callback"
 };

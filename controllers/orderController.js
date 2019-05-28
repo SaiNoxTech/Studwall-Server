@@ -24,13 +24,13 @@ exports.postGenerateOrder = async (req, res, next) => {
       ORDER_ID: order.orderId,
       CUST_ID: order.sender,
       TXN_AMOUNT,
+      MID: keys.MID,
       CHANNEL_ID: keys.CHANNEL_ID,
       WEBSITE: keys.WEBSITE,
       MOBILE_NO: req.user.phone,
       EMAIL: req.user.email,
       INDUSTRY_TYPE_ID: keys.INDUSTRY_TYPE_ID,
-      VEN_ID: order.receiver,
-      PAYTM_MERCHANT_KEY: keys.PAYTM_MERCHANT_KEY
+      CALLBACK_URL: keys.CALLBACK_URL
     };
 
     // Convert to array with keys
@@ -47,7 +47,7 @@ exports.postGenerateOrder = async (req, res, next) => {
         }
         orderObj.CHECKSUMHASH = params.CHECKSUMHASH;
         try {
-          await order.save();
+          // await order.save();
           res.json({
             success: true,
             orderObj

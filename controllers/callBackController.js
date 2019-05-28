@@ -6,7 +6,7 @@ exports.postHandleTransaction = (req, res, next) => {
   if (verifychecksum(responseBody, keys.PAYTM_MERCHANT_KEY)) {
     // Checksum is not tempered
     console.log("Verified Checksum");
-    
+    res.json(responseBody);
   } else {
     // Checksum is tempered
     console.log("Checksum not verified");

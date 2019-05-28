@@ -4,6 +4,6 @@ const router = express.Router();
 const callBackController = require("../controllers/callBackController");
 
 // Callback URL for paytm
-router.post("/transaction", callBackController.postHandleTransaction);
+router.post("/", callBackController.postHandleTransaction);
 
 module.exports = router;
