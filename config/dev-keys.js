@@ -5,6 +5,7 @@ module.exports = {
   PAYTM_ENVIORMENT: "TEST",
   PAYTM_MERCHANT_KEY: "6NxazJ&pwQD@_v7Z",
   PAYTM_FINAL_URL: "https://securegw-stage.paytm.in/theia/processTransaction",
+  PAYTM_STATUS_URL: "https://securegw-stage.paytm.in/order/status",
   CHANNEL_ID: "WAP",
   INDUSTRY_TYPE_ID: "Retail",
   WEBSITE: "WEBSTAGING",

@@ -8,9 +8,9 @@ const orderSchema = new Schema(
       type: Number,
       required: true
     },
-    status: {
-      type: Boolean,
-      default: false
+    STATUS: {
+      type: String,
+      default: "PENDING"
     },
     orderId: {
       type: String,
@@ -24,8 +24,14 @@ const orderSchema = new Schema(
       type: String,
       required: true
     },
-    transactionId: {
+    TXNID: {
       type: String
+    },
+    BANKTXNID: {
+      type: String
+    },
+    TXNDATE: {
+      type: Date
     },
     items: [
       {
