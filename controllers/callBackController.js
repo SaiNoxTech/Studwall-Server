@@ -69,7 +69,6 @@ exports.postHandleTransaction = async (req, res, next) => {
       }
 
       // Send response to client based on RESPCODE
-      console.log(statusObj);
       res.json(txnResultObj);
     } catch (error) {
       next(error);
