@@ -1,5 +1,5 @@
 const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJHNm9kV0NVRFJKR2J5YkY4IiwiaWF0IjoxNTU4ODA5NjYwfQ.e-12ZhH9g2I-YY4kb3otnQ48WgNc7EAvqU77FH2GP6k";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJiM2I4MldjUDBzUXJRV1YwIiwiaWF0IjoxNTU5MTM3OTQzfQ.R1cE30YxA0zMkKKgt1tO96yBMYzAd3_IabYS1mi0phU";
 
 fetch("/order?addMoney=True", {
   method: "POST",
@@ -8,7 +8,7 @@ fetch("/order?addMoney=True", {
     authorization: authToken
   },
   body: JSON.stringify({
-    items: [{ itemId: "MFnHLXc3uLahEmdf79K5nY55TeXV6mpn", qty: 1 }]
+    items: [{ itemId: "6jvHU94hviLvF8uqXEHLlKXFr2OXfo2f", qty: 1 }]
   })
 })
   .then(res => res.json())
