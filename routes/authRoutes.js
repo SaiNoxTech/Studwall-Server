@@ -22,7 +22,21 @@ router.post("/register" ,[
     )
       .isLength({ min: 5 })
       .isAlphanumeric()
-      .trim()
+      .trim() ,
+    body("phone")
+    .isString()
+    .isLength({min : 10})
+    .isNumeric()
+    .withMessage("Please enter a valid phone number") ,
+    body("usn")
+    .isString()
+    .isLength({min : 3})
+    .withMessage("Please enter a valid university roll number"),
+    body("name")
+    .isString()
+    .isLength({min : 3})
+    .isAlpha()
+    .withMessage("Please enter a valid name")
   ],handleValidationError, ifUserExists, authController.postRegister);
 
 
