@@ -14,7 +14,8 @@ const orderSchema = new Schema(
     },
     orderId: {
       type: String,
-      default: generateToken(32)
+      default: generateToken(32),
+      index: true
     },
     sender: {
       type: String,
@@ -35,6 +36,7 @@ const orderSchema = new Schema(
     },
     items: [
       {
+        _id: false,
         itemId: {
           type: String,
           required: true
