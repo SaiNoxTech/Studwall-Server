@@ -12,6 +12,17 @@ exports.postGenerateOrder = async (req, res, next) => {
     const vendorId = req.query.addMoney
       ? process.env.PRIME_VENDOR_ID
       : req.body.vendorId;
+
+    // Check if the sender(i.e. Student) has enough balance for the order.
+    if (!req.query.addMoney) {
+      // Student is making an order(not adding money) with a vendor.
+      if (req.user.balance < totalPrice) {
+        // If insufficient balance.
+        const error = new Error("Insufficient balance to make this order.");
+        error.statusCode = 400;
+        return next(error);
+      }
+    }
     const order = new Order({
       totalPrice,
       sender: req.user.studentId,
