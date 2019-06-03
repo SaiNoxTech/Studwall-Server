@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
 const Vendor = require("../models/Vendor");
+const Student = require("../models/Student");
 const PrimeVendor = require("../models/PrimeVendor");
 
 const { verifychecksum } = require("../config/checksum");
@@ -47,12 +48,30 @@ exports.postHandleTransaction = async (req, res, next) => {
         return res.json(txnResultObj);
       }
 
+      // Find the Student to update the balance.
+      const foundStudent = await Student.findOne({
+        studentId: foundOrder.sender
+      });
+      if (!foundStudent) {
+        const error = new Error("Student id received in order is invalid!");
+        error.statusCode = 404;
+        return next(error);
+      }
+
+      // Initialise the newStudentBalance(used for updation) variable with current balance.
+      let newStudentBalance = foundStudent.balance;
+
       // Save order with the vendor's order list. Only if txnResultObj.success = true
       // Check whether the vendor is Prime Vendor.
       const isPrimeVendor = await PrimeVendor.findOne({
         vendorId: foundOrder.receiver
       });
-      if (!isPrimeVendor) {
+
+      // If primeVendor (i.e. it must be for adding money), then add the equivalent SCoins.
+      if (isPrimeVendor) {
+        // Get equivalent amount of SCoins based on order's totalPrice(i.e how much money to be added).
+        newStudentBalance += foundOrder.totalPrice;
+      } else {
         // If not Prime Vendor then update the order list of the vendor.
         const foundVendor = await Vendor.findOne({
           vendorId: foundOrder.receiver
@@ -64,9 +83,16 @@ exports.postHandleTransaction = async (req, res, next) => {
           error.statusCode = 404;
           return next(error);
         }
+
+        // Update the newStudentBalance variable to reflect reduction in Student's balance.
+        newStudentBalance -= foundOrder.totalPrice;
+        // Push the order in vendor's order list.
         foundVendor.orders.push(statusObj.ORDERID);
         await foundVendor.save();
       }
+
+      // Update the balance
+      await foundStudent.updateBalance(newStudentBalance);
 
       // Send response to client based on RESPCODE
       res.json(txnResultObj);
