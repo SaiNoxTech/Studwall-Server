@@ -28,8 +28,16 @@ const vendorSchema = new Schema(
       required: true,
       unique: true
     },
+    items: [
+      {
+        _id: false,
+        type: String,
+        ref: "Item"
+      }
+    ],
     orders: [
       {
+        _id: false,
         type: String,
         ref: "Order"
       }
