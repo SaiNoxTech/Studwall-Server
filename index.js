@@ -13,6 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const callBackRoutes = require("./routes/callBackRoutes");
+const vendorRoutes = require("./routes/vendorRoutes");
 
 app.use(bodyParser.json());
 app.use(
@@ -28,6 +29,8 @@ app.use("/auth", authRoutes);
 app.use("/order", orderRoutes);
 app.use("/admin", adminRoutes);
 app.use("/callback", callBackRoutes);
+app.use("/vendor", vendorRoutes);
+
 app.get("/", (req, res, next) => {
   res.sendFile(__dirname + "/client/index.html");
 });
