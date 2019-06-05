@@ -6,10 +6,11 @@ const generateRandomToken = require("../helpers/generateRandomToken");
 exports.postAddVendor = async (req, res, next) => {
   // Validate req.body
   try {
+    const generatedPassword = generateRandomToken(6);
     const vendorObj = {
       name: req.body.name,
       email: req.body.email,
-      password: generateRandomToken(6),
+      password: generatedPassword,
       phone: req.body.phone
     };
     const foundVendor = await Vendor.findOne({
@@ -36,7 +37,7 @@ exports.postAddVendor = async (req, res, next) => {
         // Send mail to the vendor with the created password
         res.json({
           success: true,
-          password: vendorObj.password
+          password: generatedPassword
         });
       });
     });
