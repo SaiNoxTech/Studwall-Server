@@ -19,11 +19,13 @@ const orderSchema = new Schema(
     },
     sender: {
       type: String,
-      required: true
+      required: true,
+      index: true
     },
     receiver: {
       type: String,
-      required: true
+      required: true,
+      index: true
     },
     TXNID: {
       type: String

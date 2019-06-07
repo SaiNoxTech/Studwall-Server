@@ -34,13 +34,6 @@ const vendorSchema = new Schema(
         type: String,
         ref: "Item"
       }
-    ],
-    orders: [
-      {
-        _id: false,
-        type: String,
-        ref: "Order"
-      }
     ]
   },
   {

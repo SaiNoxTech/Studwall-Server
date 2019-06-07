@@ -1,5 +1,4 @@
 const Order = require("../models/Order");
-const Vendor = require("../models/Vendor");
 const Student = require("../models/Student");
 const PrimeVendor = require("../models/PrimeVendor");
 
@@ -61,7 +60,7 @@ exports.postHandleTransaction = async (req, res, next) => {
       // Initialise the newStudentBalance(used for updation) variable with current balance.
       let newStudentBalance = foundStudent.balance;
 
-      // Save order with the vendor's order list. Only if txnResultObj.success = true
+      // Update the Student's balance appropriately.
       // Check whether the vendor is Prime Vendor.
       const isPrimeVendor = await PrimeVendor.findOne({
         vendorId: foundOrder.receiver
@@ -72,23 +71,8 @@ exports.postHandleTransaction = async (req, res, next) => {
         // Get equivalent amount of SCoins based on order's totalPrice(i.e how much money to be added).
         newStudentBalance += foundOrder.totalPrice;
       } else {
-        // If not Prime Vendor then update the order list of the vendor.
-        const foundVendor = await Vendor.findOne({
-          vendorId: foundOrder.receiver
-        });
-        if (!foundVendor) {
-          const error = new Error(
-            "Vendor with the provided vendorId not found."
-          );
-          error.statusCode = 404;
-          return next(error);
-        }
-
         // Update the newStudentBalance variable to reflect reduction in Student's balance.
         newStudentBalance -= foundOrder.totalPrice;
-        // Push the order in vendor's order list.
-        foundVendor.orders.push(statusObj.ORDERID);
-        await foundVendor.save();
       }
 
       // Update the balance

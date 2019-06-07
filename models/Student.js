@@ -44,13 +44,7 @@ const studentSchema = new Schema(
     balance: {
       type: Number,
       default: 0
-    },
-    orders: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Order"
-      }
-    ]
+    }
   },
   {
     timestamps: true
