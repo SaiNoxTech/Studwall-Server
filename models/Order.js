@@ -50,20 +50,7 @@ const orderSchema = new Schema(
       }
     ]
   },
-  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true } }
+  { timestamps: true }
 );
-
-orderSchema.virtual("senderDocument", {
-  ref: "Student",
-  localField: "sender",
-  foreignField: "studentId",
-  justOne: true
-});
-orderSchema.virtual("receiverDocument", {
-  ref: "Vendor",
-  localField: "receiver",
-  foreignField: "vendorId",
-  justOne: true
-});
 
 module.exports = mongoose.model("Order", orderSchema);
