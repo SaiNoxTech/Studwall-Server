@@ -35,7 +35,6 @@ router.post("/register" ,[
     body("name")
     .isString()
     .isLength({min : 3})
-    .isAlpha()
     .withMessage("Please enter a valid name")
   ],handleValidationError, ifUserExists, authController.postRegister);
 
