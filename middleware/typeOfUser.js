@@ -1,4 +1,4 @@
-module.exports = (req, res, next) => {
+exports.isStudent = (req, res, next) => {
   if (!req.user) {
     const error = new Error("User not logged in.");
     return next(error);
