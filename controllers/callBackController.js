@@ -73,6 +73,8 @@ exports.postHandleTransaction = async (req, res, next) => {
       } else {
         // Update the newStudentBalance variable to reflect reduction in Student's balance.
         newStudentBalance -= foundOrder.totalPrice;
+
+        // SEND NOTIFICATION TO VENDOR ABOUT NEW ORDER!
       }
 
       // Update the balance
