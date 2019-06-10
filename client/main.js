@@ -1,22 +1,26 @@
 const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJ3bkNPSjluNFoyZGd5aEs4IiwiaWF0IjoxNTU5OTI0OTg3fQ.TehWQTkB2IqAH1oSrgeqiLxCsIAQx4ysaKEV89PO1rE";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJ3bkNPSjluNFoyZGd5aEs4IiwiaWF0IjoxNTYwMTY3NjcwfQ.h-_4VIhLJGBCy0qYJED7-d0d_YRXZXdJJ_yAzFrvd7g";
 
-fetch("/order?addMoney=True", {
+fetch("/order", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     authorization: authToken
   },
   body: JSON.stringify({
-    items: [{ itemId: "Ms0ZyAlStLjyOoj6p6zH6UZK8AuFTyQN", qty: 5 }]
+    items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 5 }]
+    // items: [{ itemId: "KBmXkIkoiqG6k90PXkhcwQ4PmlS9KlmM", qty: 80 }]
   })
 })
   .then(res => res.json())
-  .then(({ orderObj }) => {
+  .then(res => {
+    if (res.error) {
+      return console.log(res);
+    }
+    const { orderObj } = res;
     let form = document.createElement("form");
     form.action = "https://securegw-stage.paytm.in/theia/processTransaction";
     form.method = "POST";
-
     Object.keys(orderObj).forEach(key => {
       const i = document.createElement("input");
       i.type = "hidden";

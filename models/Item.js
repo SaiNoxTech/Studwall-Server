@@ -12,6 +12,10 @@ const itemSchema = new Schema(
       type: String,
       required: true
     },
+    isAvailable: {
+      type: Boolean,
+      default: true
+    },
     owner: {
       type: String,
       required: true

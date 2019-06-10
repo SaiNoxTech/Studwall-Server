@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Item = require("../models/Item");
 
 exports.getOrders = async (req, res, next) => {
   try {
@@ -31,6 +32,28 @@ exports.getOrders = async (req, res, next) => {
   }
 };
 
-exports.postAddItem = (req, res, next) => {
+exports.postAddItem = async (req, res, next) => {
   // validate req.body
+  // Check value of price(should be non zero)
+  // Limit length of name
+  try {
+    const itemObj = {
+      price: Number(req.body.price),
+      name: req.body.name,
+      owner: req.user.vendorId
+    };
+    // Create a new Item and save it
+    const newItem = new Item(itemObj);
+    await newItem.save();
+    // Push the itemId into vendor's items list.
+    req.user.items.push(newItem.itemId);
+    await req.user.save();
+    res.status(201).json({
+      success: true
+    })
+    
+  } catch (error) {
+    next(error);
+  }
+
 };
