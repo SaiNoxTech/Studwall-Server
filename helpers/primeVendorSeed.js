@@ -23,6 +23,7 @@ exports.setSCoin = async () => {
     if (!foundSCoin) {
       const SCoin = new Item({
         price: 1,
+        name: "S Coin",
         owner: process.env.PRIME_VENDOR_ID,
         isSCoin: true
       });

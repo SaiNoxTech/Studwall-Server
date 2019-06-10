@@ -8,6 +8,10 @@ const itemSchema = new Schema(
       type: Number,
       required: true
     },
+    name: {
+      type: String,
+      required: true
+    },
     owner: {
       type: String,
       required: true
@@ -18,7 +22,12 @@ const itemSchema = new Schema(
       index: true
     }
   },
-  { timestamps: true, toObject: { virtuals: true }, toJSON: { virtuals: true }, strict: false }
+  {
+    timestamps: true,
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true },
+    strict: false
+  }
 );
 
 itemSchema.virtual("ownerDocument", {

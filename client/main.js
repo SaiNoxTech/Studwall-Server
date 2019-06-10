@@ -8,7 +8,7 @@ fetch("/order?addMoney=True", {
     authorization: authToken
   },
   body: JSON.stringify({
-    items: [{ itemId: "Xwmq17DvAz1RLOHZs0rs2uKsbF9feu12", qty: 5 }]
+    items: [{ itemId: "Ms0ZyAlStLjyOoj6p6zH6UZK8AuFTyQN", qty: 5 }]
   })
 })
   .then(res => res.json())

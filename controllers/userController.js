@@ -30,3 +30,7 @@ exports.getOrders = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.postAddItem = (req, res, next) => {
+  // validate req.body
+};
