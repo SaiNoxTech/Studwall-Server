@@ -40,7 +40,9 @@ exports.postGenerateOrder = async (req, res, next) => {
       await req.user.updateBalance(newStudentBalance);
       await order.save();
       return res.json({
-        success: true
+        success: true,
+        totalPrice,
+        remainingBalance: newStudentBalance
       });
     } else {
       const order = new Order({
