@@ -1,16 +1,16 @@
 const authToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJ3bkNPSjluNFoyZGd5aEs4IiwiaWF0IjoxNTYwMTY3NjcwfQ.h-_4VIhLJGBCy0qYJED7-d0d_YRXZXdJJ_yAzFrvd7g";
 
-fetch("/order", {
+fetch("/order?addMoney=True", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     authorization: authToken
   },
   body: JSON.stringify({
-    items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 4 }],
-    vendorId: "DPj5I6ryowFjxGLR"
-    // items: [{ itemId: "KBmXkIkoiqG6k90PXkhcwQ4PmlS9KlmM", qty: 80 }]
+    // items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 4 }],
+    // vendorId: "DPj5I6ryowFjxGLR"
+    items: [{ itemId: "KBmXkIkoiqG6k90PXkhcwQ4PmlS9KlmM", qty: 80 }]
   })
 })
   .then(res => res.json())

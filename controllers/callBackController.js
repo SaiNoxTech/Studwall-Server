@@ -36,6 +36,11 @@ exports.postHandleTransaction = async (req, res, next) => {
         error.statusCode = 500;
         return next(error);
       }
+      if (foundOrder.STATUS != "PENDING") {
+        const error = new Error("Txn has already being completed!");
+        error.statusCode = 403;
+        return next(error);
+      }
       foundOrder.TXNID = TXNID;
       foundOrder.BANKTXNID = BANKTXNID;
       foundOrder.TXNDATE = new Date(TXNDATE);
