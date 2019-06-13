@@ -8,13 +8,16 @@ fetch("/order", {
     authorization: authToken
   },
   body: JSON.stringify({
-    items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 5 }]
+    items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 4 }],
+    vendorId: "DPj5I6ryowFjxGLR"
     // items: [{ itemId: "KBmXkIkoiqG6k90PXkhcwQ4PmlS9KlmM", qty: 80 }]
   })
 })
   .then(res => res.json())
   .then(res => {
     if (res.error) {
+      return console.log(res);
+    } else if (res.success && !res.orderObj) {
       return console.log(res);
     }
     const { orderObj } = res;

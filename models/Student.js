@@ -52,7 +52,7 @@ const studentSchema = new Schema(
 );
 
 studentSchema.methods.updateBalance = async function(newBalance) {
-  if (newBalance <= 0) {
+  if (newBalance < 0) {
     throw new Error("Invalid balance amount.");
   }
   this.balance = Number(newBalance);

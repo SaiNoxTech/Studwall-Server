@@ -31,6 +31,7 @@ module.exports = async (req, res, next) => {
     // set the current user(vendor/student) as req.user
     user.userType = payload.userType;
     req.user = user;
+    req.user.balance = Number(req.user.balance);
     next();
   } catch (error) {
     next(error);

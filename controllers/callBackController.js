@@ -70,11 +70,6 @@ exports.postHandleTransaction = async (req, res, next) => {
       if (isPrimeVendor) {
         // Get equivalent amount of SCoins based on order's totalPrice(i.e how much money to be added).
         newStudentBalance += foundOrder.totalPrice;
-      } else {
-        // Update the newStudentBalance variable to reflect reduction in Student's balance.
-        newStudentBalance -= foundOrder.totalPrice;
-
-        // SEND NOTIFICATION TO VENDOR ABOUT NEW ORDER!
       }
 
       // Update the balance
