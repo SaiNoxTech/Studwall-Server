@@ -17,6 +17,11 @@ module.exports = async (req, res, next) => {
         const error = new Error("One or more items does not exists!");
         error.statusCode = 404;
         return next(error);
+      } else if (!item.isAvailable) {
+        // If an item is currently unavailable , stop the order
+        const error = new Error("One or more item is currently not available!");
+        error.statusCode = 403;
+        return next(error);
       } else {
         // Find the fetched(resultItemsArr) item's itemId in req.body.items[]
         const foundItem = req.body.items.find(bodyItem => {
