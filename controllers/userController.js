@@ -32,7 +32,7 @@ exports.getOrders = async (req, res, next) => {
   }
 };
 
-exports.postAddItem = async (req, res, next) => {
+exports.postItem = async (req, res, next) => {
   // validate req.body
   // Check value of price(should be non zero)
   // Limit length of name
@@ -50,10 +50,43 @@ exports.postAddItem = async (req, res, next) => {
     await req.user.save();
     res.status(201).json({
       success: true
-    })
-    
+    });
   } catch (error) {
     next(error);
   }
+};
 
+exports.patchItem = async (req, res, next) => {
+  // Validate incoming item!!
+  try {
+    const updatedItemObj = {};
+    if (req.body.item.price) {
+      updatedItemObj.price = Number(req.body.item.price);
+    }
+    if (req.body.item.isAvailable) {
+      if (req.body.item.isAvailable.toLowerCase() === "true") {
+        updatedItemObj.isAvailable = true;
+      } else if (req.body.item.isAvailable.toLowerCase() === "false") {
+        updatedItemObj.isAvailable = false;
+      }
+    }
+    if (req.body.item.name) {
+      updatedItemObj.name = String(req.body.item.name);
+    }
+    const foundItem = await Item.findOne({ itemId: req.body.item.itemId });
+    if (!foundItem) {
+      const error = new Error("Invalid itemId");
+      error.statusCode = 404;
+      return next(error);
+    }
+    Object.entries(updatedItemObj).forEach(([key, val]) => {
+      foundItem[key] = val;
+    });
+    await foundItem.save();
+    res.json({
+      success: true
+    });
+  } catch (error) {
+    next(error);
+  }
 };

@@ -1,4 +1,4 @@
-function checkForUser(typeOfUser,req,next){
+function checkForUser(typeOfUser, req, next) {
   if (!req.user) {
     const error = new Error("User not logged in.");
     return next(error);
@@ -13,8 +13,18 @@ function checkForUser(typeOfUser,req,next){
 }
 
 exports.isStudent = (req, res, next) => {
-  return checkForUser("Student", req,next);
+  return checkForUser("Student", req, next);
 };
 exports.isVendor = (req, res, next) => {
   return checkForUser("Vendor", req, next);
+};
+
+exports.isItemOwner = (req, res, next) => {
+  if (req.user.items.includes(req.body.item.itemId)) {
+    next();
+  } else {
+    const error = new Error("Unauthorized to change this item");
+    error.statusCode = 403;
+    next(error);
+  }
 };

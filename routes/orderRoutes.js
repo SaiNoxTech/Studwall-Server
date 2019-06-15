@@ -3,7 +3,7 @@ const router = express.Router();
 
 const orderController = require("../controllers/orderController");
 const isAuth = require("../middleware/isAuth");
-const {isStudent} = require("../middleware/typeOfUser");
+const {isStudent} = require("../middleware/userMiddlewares");
 const validateOrderItems = require("../middleware/validateOrderItems");
 const handleValidationError = require("../middleware/handleValidationError");
 const {body} = require("express-validator/check");
