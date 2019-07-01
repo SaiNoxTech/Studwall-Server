@@ -44,6 +44,10 @@ const studentSchema = new Schema(
     balance: {
       type: Number,
       default: 0
+    },
+    referralCode: {
+      type: String,
+      default: ""
     }
   },
   {

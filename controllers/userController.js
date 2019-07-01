@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
 const Item = require("../models/Item");
+const generateRandomToken = require("../helpers/generateRandomToken");
 
 exports.getOrders = async (req, res, next) => {
   try {
@@ -89,4 +90,16 @@ exports.patchItem = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+exports.getReferral = async (req, res, next) => {
+  if (!req.user.referralCode) {
+    // Generate a referral token
+    req.user.referralCode = generateRandomToken(5);
+    await req.user.save();
+  }
+  res.json({
+    success: true,
+    referralCode: req.user.referralCode
+  });
 };

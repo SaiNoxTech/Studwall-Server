@@ -1,5 +1,5 @@
 const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJ3bkNPSjluNFoyZGd5aEs4IiwiaWF0IjoxNTYwMTY3NjcwfQ.h-_4VIhLJGBCy0qYJED7-d0d_YRXZXdJJ_yAzFrvd7g";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJIMnNvMGNweDh3SUMzNkVzIiwiaWF0IjoxNTYxOTg0MDk0fQ.hNkKv4T2gsl0kCGL0V_bmicbh6vta1StpFMPOxxWpLg";
 
 fetch("/order?addMoney=True", {
   method: "POST",
