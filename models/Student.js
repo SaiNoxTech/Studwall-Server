@@ -21,7 +21,7 @@ const studentSchema = new Schema(
     studentId: {
       type: String,
       index: true,
-      default: generateToken(16)
+      default: "S-"+generateToken(8)
     },
     phone: {
       type: String,

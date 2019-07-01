@@ -1,5 +1,5 @@
 const authToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJIMnNvMGNweDh3SUMzNkVzIiwiaWF0IjoxNTYxOTg0MDk0fQ.hNkKv4T2gsl0kCGL0V_bmicbh6vta1StpFMPOxxWpLg";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJTLWtrZlUwZ2Z1IiwiaWF0IjoxNTYxOTg2MTA3fQ.IAOXn6jdqrIoBYxaTDHxF7JI6xBm_W61s6urPANWqwQ";
 
 fetch("/order?addMoney=True", {
   method: "POST",
@@ -8,9 +8,9 @@ fetch("/order?addMoney=True", {
     authorization: authToken
   },
   body: JSON.stringify({
-    // items: [{ itemId: "kmcAjcrvqOycKLbvEzeTgrHw1PpVQ5uJ", qty: 4 }],
-    // vendorId: "DPj5I6ryowFjxGLR"
-    items: [{ itemId: "KBmXkIkoiqG6k90PXkhcwQ4PmlS9KlmM", qty: 80 }]
+    // items: [{ itemId: "I-2pPPawJD", qty: 4 }],
+    // vendorId: "V-Gc595gaK"
+    items: [{ itemId: "I-u1atrHb6", qty: 80 }]
   })
 })
   .then(res => res.json())

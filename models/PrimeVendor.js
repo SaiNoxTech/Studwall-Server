@@ -5,7 +5,7 @@ const generateRandomToken = require("../helpers/generateRandomToken");
 const primeVendorSchema = new Schema({
   vendorId: {
     type: String,
-    default: generateRandomToken(16)
+    default: "PV-"+generateRandomToken(8)
   }
 });
 

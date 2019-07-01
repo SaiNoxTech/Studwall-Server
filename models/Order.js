@@ -14,7 +14,7 @@ const orderSchema = new Schema(
     },
     orderId: {
       type: String,
-      default: generateToken(32),
+      default: "O-"+generateToken(12),
       index: true
     },
     sender: {

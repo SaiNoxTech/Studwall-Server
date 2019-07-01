@@ -17,7 +17,7 @@ const vendorSchema = new Schema(
     vendorId: {
       type: String,
       index: true,
-      default: generateToken(16)
+      default: "V-"+generateToken(8)
     },
     password: {
       type: String,

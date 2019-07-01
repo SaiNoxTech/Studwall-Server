@@ -22,7 +22,7 @@ const itemSchema = new Schema(
     },
     itemId: {
       type: String,
-      default: generateToken(32),
+      default: "I-"+generateToken(8),
       index: true
     }
   },
