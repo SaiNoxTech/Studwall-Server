@@ -19,6 +19,7 @@ exports.setPrimeVendor = async () => {
 
 exports.setSCoin = async () => {
   try {
+    let sCoinItemId = "";
     const foundSCoin = await Item.findOne({ isSCoin: true });
     if (!foundSCoin) {
       const SCoin = new Item({
@@ -27,9 +28,13 @@ exports.setSCoin = async () => {
         owner: process.env.PRIME_VENDOR_ID,
         isSCoin: true
       });
+      sCoinItemId = SCoin.itemId;
       await SCoin.save();
       console.log("SCoin created");
+    } else {
+      sCoinItemId = foundSCoin.itemId;
     }
+    process.env.SCOIN_ITEM_ID = sCoinItemId;
   } catch (error) {
     throw error;
   }

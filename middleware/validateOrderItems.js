@@ -9,6 +9,16 @@ module.exports = async (req, res, next) => {
     promiseArr.push(promise);
   });
   try {
+    // Handle the case for adding money
+    // If addMoney=True then check if the item id matched id of SCoin
+    if (req.query.addMoney) {
+      const [item] = await Promise.all(promiseArr);
+      if (item.itemId != process.env.SCOIN_ITEM_ID) {
+        const error = new Error("Invalid item id for SCoin");
+        error.statusCode = 404;
+        next(error);
+      }
+    }
     const resultItemsArr = await Promise.all(promiseArr);
     for (let i = 0; i < resultItemsArr.length; i++) {
       let item = resultItemsArr[i];
@@ -31,6 +41,7 @@ module.exports = async (req, res, next) => {
         item.qty = foundItem.qty;
       }
     }
+
     // Put resultItemsArr in req.items.
     // It will contain an item with its price and qty.
     // To be used in calculateTotal helper.

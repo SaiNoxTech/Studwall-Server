@@ -1,16 +1,16 @@
 const authToken =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyVHlwZSI6IlN0dWRlbnQiLCJzdHVkZW50SWQiOiJTLWtrZlUwZ2Z1IiwiaWF0IjoxNTYxOTg2MTA3fQ.IAOXn6jdqrIoBYxaTDHxF7JI6xBm_W61s6urPANWqwQ";
 
-fetch("/order?addMoney=True", {
+fetch("/order", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
     authorization: authToken
   },
   body: JSON.stringify({
-    // items: [{ itemId: "I-2pPPawJD", qty: 4 }],
-    // vendorId: "V-Gc595gaK"
-    items: [{ itemId: "I-u1atrHb6", qty: 80 }]
+    items: [{ itemId: "I-2pPPawJD", qty: 4 }],
+    vendorId: "V-Gc595gaK"
+    // items: [{ itemId: "I-u1atrHb6", qty: 80 }]
   })
 })
   .then(res => res.json())
